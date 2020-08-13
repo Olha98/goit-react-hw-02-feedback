@@ -8,7 +8,6 @@ export default class Feedback extends Component {
         bad: 0,
         total:0,
         positiveFeedback:0,
-        num: 0.1
     }
     changeState = (name) => {
         this.setState(prevState => ({ [name]: prevState[name] + 1 }))
@@ -18,17 +17,11 @@ export default class Feedback extends Component {
      return this.state.total = this.state.good + this.state.neutral + this.state.bad
     }
 
-    negativeSum=()=>{
-    return this.state.neutral + this.state.bad 
-    }
 
     positiveFeedback=()=>{
+      const { good, neutral, bad } = this.state;
+      return Number((good / (bad + good + neutral)) * 100);
       
-      if(this.totalSum() > 0){
-        return (this.totalSum() - this.negativeSum()) / this.state.num
-      } else{
-        return '0'
-      }
     }
 
 
